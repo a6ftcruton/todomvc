@@ -5,6 +5,13 @@ var App = {
   init: function() {
     this.renderTodos();
     this.createTodo();   
+    this.deleteTodo();   
+  },
+
+  deleteTodo: function() {
+    $('.delete').click(function() {
+      console.log($(this));
+    });
   },
 
   createTodo: function() {
@@ -16,7 +23,11 @@ var App = {
                      .fadeIn("slow").delay(1400).fadeOut("slow");
           return false; //prevent browser from reading rest of this script
         } else {
-            $('#todo-list').prepend('<li class="todo">' + name + '</li>' + '<h2 class="delete-x">' + "X" + '</h2>')
+          console.log($(this));
+            var clear = '<h3 class="delete">' + "X" + '</h3>';
+            var todo = { name: "<li class='todo name'>" + name + clear + "</li>", }
+            $('#todo-list').append(todo.name);
+            //$('#todo-list').prepend('<li class="todo name">' + name + '<h3 class="delete">' + "X" + '</h3>' + '</li>' )
             $('#form')[0].reset();
             var todos = $('#todo-list').html();
             localStorage.setItem("todos", todos);

@@ -11,10 +11,10 @@ li.todo a {
 .name {
   margin-left: 10%;
 }
-.delete-x {
+.delete {
   position: absolute;
   right: 5%;
-  top: 10px;
+  top: -50%;
 }
 .checkbox {
   display: none;
