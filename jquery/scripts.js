@@ -14,11 +14,20 @@ var App = {
     this.deleteTodo();   
   },
 
+  renderTodos: function() {
+    if(localStorage.getItem('todos')) {
+      jQ.todoList.html(localStorage.getItem('todos')); 
+    }
+  }, // end renderTodos
+
   deleteTodo: function() {
     $('.delete').click(function() {
-      console.log($(this));
+      var todos;
+      $(this).closest("li").remove();
+      todos = jQ.todoList.html();
+      localStorage.setItem("todos", todos); 
     });
-  },
+  }, // end deleteTodo
 
   createTodo: function() {
 
@@ -43,13 +52,8 @@ var App = {
         }
       }
     });
-  }, //end createTodo
+  } //end createTodo
 
-  renderTodos: function() {
-    if(localStorage.getItem('todos')) {
-      jQ.todoList.html(localStorage.getItem('todos')); 
-    }
-  }
 
 }; // end App
 
