@@ -4,8 +4,9 @@
 var jQ = {
   newTodo: $("#new-todo"), 
   todoList: $("#todo-list")
-}
+};
 
+// All App Functions
 var App = {
 
   init: function() {
@@ -32,9 +33,7 @@ var App = {
   createTodo: function() {
 
     jQ.newTodo.keydown(function(e){
-
       var input = jQ.newTodo.val();
-
       if(e.keyCode == 13) {
         if(!input.trim()) {
           $('#alert').html("<p>Cannot submit a blank todo</p>")
@@ -53,8 +52,6 @@ var App = {
       }
     });
   } //end createTodo
-
-
 }; // end App
 
 App.init();
