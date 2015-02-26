@@ -27,3 +27,8 @@ label.check {
   padding: 0 !important;
   color: #b3b3b3; 
 }
+#alert {
+  font-size: 20px;
+  text-align: center;
+  color: red;
+}

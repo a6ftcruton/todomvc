@@ -1,57 +1,64 @@
 'use strict'
 
-// Save common selectors
+// Common selectors
 var jQ = {
   newTodo: $("#new-todo"), 
   todoList: $("#todo-list")
 };
 
-// All App Functions
+// App Methods
 var App = {
 
   init: function() {
     this.renderTodos();
-    this.createTodo();   
     this.deleteTodo();   
+    this.createTodo();   
   },
 
   renderTodos: function() {
     if(localStorage.getItem('todos')) {
       jQ.todoList.html(localStorage.getItem('todos')); 
     }
-  }, // end renderTodos
+  },
 
   deleteTodo: function() {
     $('.delete').click(function() {
-      var todos;
+      var remainingTodos;
       $(this).closest("li").remove();
-      todos = jQ.todoList.html();
-      localStorage.setItem("todos", todos); 
+      remainingTodos = jQ.todoList.html();
+      App.setItem(remainingTodos);
     });
-  }, // end deleteTodo
+  },
 
   createTodo: function() {
-
     jQ.newTodo.keydown(function(e){
       var input = jQ.newTodo.val();
       if(e.keyCode == 13) {
         if(!input.trim()) {
-          $('#alert').html("<p>Cannot submit a blank todo</p>")
-                     .fadeIn("slow").delay(1400).fadeOut("slow");
-          return false; //prevent browser from reading rest of this script
+          App.checkInput();
+          return false;
         } else {
             var todos;
             var clear = '<h3 class="delete">' + "X" + '</h3>';
-            var todo = { name: "<li class='todo name'>" + input + clear + "</li>", }
-            jQ.todoList.append(todo.name);
+            var todo = "<li class='todo name'>" + input + clear + "</li>";
+            jQ.todoList.append(todo);
             $('#form')[0].reset();
             todos = jQ.todoList.html();
-            localStorage.setItem("todos", todos);
-            return false;
+            App.setItem(todos);
         }
       }
     });
-  } //end createTodo
+  }, 
+
+  // Helper methods
+  setItem : function(items) {
+    localStorage.setItem("todos", items)
+  },
+
+  checkInput: function() {
+    $('#alert').html("<p>Cannot submit a blank todo</p>")
+               .fadeIn(1200).delay(1200).fadeOut("slow");
+  }
 }; // end App
 
 App.init();
