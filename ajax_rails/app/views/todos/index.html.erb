@@ -1,0 +1,28 @@
+<body>
+  <section id="todoapp">
+    <header id="header">
+      <h1>todos</h1>
+      <div>
+        <%= form_for @todo do |f| %> 
+          <%= f.text_field :name, placeholder: "What needs to be done?", id: "new-todo" %>
+        <% end %>      
+      </div>
+    </header>
+    <section id="main">
+      <ul id="todo-list">
+        <% @todos.each do |todo| %>
+          <li class="todo">
+            <%= form_tag todo_path(todo), method: :patch do %>
+              <%= check_box_tag :completed, true, todo.completed %>
+              <%= submit_tag "Complete" %>
+            <% end %>
+            <%#= check_box_tag 'completed', "✓", todo.completed, id: "#{todo.id}", class: "checkbox" %>
+            <%#= label_tag 'completed', "✓", class: "check" %>
+            <%= link_to todo.name, todo_path(todo), class: "name" %>
+            <%= link_to "X", todo_path(todo), method: :delete, class: "delete-x" %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </section>
+</body>
